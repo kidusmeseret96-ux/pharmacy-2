@@ -1,0 +1,6 @@
+{
+  "name": "Apotheca Rx — Pharmacy Management & POS",
+  "description": "Commercial pharmacy management suite with drug inventory, low-stock threshold alerts, cashier POS with payment and prescription image capture, and owner profit analytics.",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

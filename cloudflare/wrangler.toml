@@ -1,0 +1,13 @@
+name = "yoya-vendor-control"
+main = "worker.ts"
+compatibility_date = "2026-01-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "yoya_vendor_db"
+database_id = "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+
+# Set secrets before deploying:
+# wrangler secret put VENDOR_ADMIN_PASSCODE
+# wrangler secret put VENDOR_TOKEN_SECRET
+# wrangler secret put VENDOR_SYNC_SECRET

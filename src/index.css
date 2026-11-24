@@ -1,0 +1,331 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-display: "Outfit", "Noto Sans Ethiopic", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Noto Sans Ethiopic", -apple-system, BlinkMacSystemFont, ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+    --bg-canvas: #EDF3FF;
+    --bg-surface: rgba(255, 255, 255, 0.88);
+    --bg-elevated: #E3ECFC;
+    --border-hairline: rgba(21, 101, 245, 0.11);
+    --text-primary: #0F172A;
+    --text-secondary: #526077;
+    --accent-primary: #1464F6;
+    --accent-hover: #0B4ED2;
+    --accent-cyan: #0EA5E9;
+    --accent-emerald: #0D9464;
+    --accent-violet: #7C3AED;
+    --accent-gold: #D97706;
+  }
+
+  .dark {
+    color-scheme: dark;
+    --bg-canvas: #050917;
+    --bg-surface: rgba(11, 20, 42, 0.78);
+    --bg-elevated: #111F40;
+    --border-hairline: rgba(56, 189, 248, 0.16);
+    --text-primary: #F0F6FF;
+    --text-secondary: #93A8C8;
+    --accent-primary: #2589FF;
+    --accent-hover: #1473E6;
+    --accent-cyan: #22D3EE;
+    --accent-emerald: #22C58B;
+    --accent-violet: #A855F7;
+    --accent-gold: #F59E0B;
+  }
+
+  html,
+  body {
+    overflow-x: clip;
+    max-width: 100%;
+  }
+
+  html.yoya-scroll-locked,
+  body.yoya-scroll-locked {
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Glowing focus borders on form inputs */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]),
+  select,
+  textarea {
+    transition: border-color 140ms ease, box-shadow 140ms ease;
+  }
+
+  input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: rgba(20, 100, 246, 0.65);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.18);
+  }
+
+  .dark input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):focus,
+  .dark select:focus,
+  .dark textarea:focus {
+    border-color: rgba(34, 211, 238, 0.72);
+    box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.2);
+  }
+}
+
+.pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+.yoya-scroll-contain {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Crisp theme transitions only where needed */
+.yoya-theme-transition {
+  transition: background-color 180ms ease, color 150ms ease;
+}
+
+/* Lightweight Frosted Glass for Sticky Chrome Only (Header / Sidebar / Bottom Bar) */
+.apple-glass {
+  background: rgba(247, 250, 255, 0.88);
+  backdrop-filter: blur(10px) saturate(135%);
+  -webkit-backdrop-filter: blur(10px) saturate(135%);
+}
+.dark .apple-glass {
+  background: rgba(8, 15, 34, 0.88);
+  backdrop-filter: blur(10px) saturate(135%);
+  -webkit-backdrop-filter: blur(10px) saturate(135%);
+}
+
+/* High-FPS Opaque-Translucent Card Surface (no per-card backdrop-blur GPU thrash) */
+.apple-surface {
+  background: linear-gradient(155deg, rgba(255, 255, 255, 0.97) 0%, rgba(245, 249, 255, 0.95) 100%);
+  box-shadow:
+    0 2px 4px rgba(15, 35, 95, 0.04),
+    0 10px 24px -10px rgba(20, 75, 180, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(21, 101, 245, 0.11);
+}
+.dark .apple-surface {
+  background: linear-gradient(155deg, rgba(16, 28, 58, 0.96) 0%, rgba(10, 18, 40, 0.97) 100%);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.35),
+    0 12px 28px -12px rgba(0, 10, 35, 0.65),
+    inset 0 1px 0 rgba(125, 211, 252, 0.12);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+}
+
+.apple-inset {
+  background: rgba(20, 82, 200, 0.045);
+  border: 1px solid rgba(20, 82, 200, 0.085);
+}
+.dark .apple-inset {
+  background: rgba(56, 189, 248, 0.065);
+  border: 1px solid rgba(56, 189, 248, 0.12);
+}
+
+.yoya-canvas {
+  background-color: #EDF3FF;
+  background-image:
+    radial-gradient(960px 520px at 10% -6%, rgba(37, 137, 255, 0.13), transparent 64%),
+    radial-gradient(800px 440px at 90% 4%, rgba(14, 165, 233, 0.1), transparent 60%),
+    radial-gradient(700px 420px at 65% 95%, rgba(124, 58, 237, 0.065), transparent 62%);
+}
+.dark .yoya-canvas {
+  background-color: #050917;
+  background-image:
+    radial-gradient(980px 540px at 12% -8%, rgba(37, 137, 255, 0.2), transparent 64%),
+    radial-gradient(840px 480px at 88% 2%, rgba(34, 211, 238, 0.14), transparent 60%),
+    radial-gradient(760px 440px at 60% 96%, rgba(168, 85, 247, 0.11), transparent 62%);
+}
+
+/* Primary CTA Gradient Glow (Cobalt + Cyan) */
+.yoya-btn-primary {
+  background: linear-gradient(135deg, #1E7BFF 0%, #1055E8 55%, #0D8AE5 100%);
+  color: #FFFFFF;
+  box-shadow:
+    0 2px 6px rgba(16, 85, 232, 0.28),
+    0 8px 20px -6px rgba(20, 100, 246, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.32);
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+.yoya-btn-primary:hover:not(:disabled) {
+  opacity: 0.94;
+}
+.dark .yoya-btn-primary {
+  background: linear-gradient(135deg, #2D8CFF 0%, #1464F6 52%, #06B6D4 100%);
+  color: #FFFFFF;
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.45),
+    0 8px 22px -5px rgba(34, 211, 238, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.36);
+}
+.dark .yoya-btn-primary:hover:not(:disabled) {
+  opacity: 0.94;
+}
+
+/* Emerald Secondary Clinical CTA Glow */
+.yoya-btn-emerald {
+  background: linear-gradient(135deg, #10B981 0%, #0D8A5E 100%);
+  color: #FFFFFF;
+  box-shadow:
+    0 2px 6px rgba(13, 138, 94, 0.25),
+    0 8px 18px -6px rgba(16, 185, 129, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28);
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+.yoya-btn-emerald:hover:not(:disabled) {
+  opacity: 0.94;
+}
+
+/* Premium Skeleton Shimmer */
+@keyframes yoyaShimmerSweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.yoya-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+.yoya-shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.52) 50%,
+    transparent 100%
+  );
+  animation: yoyaShimmerSweep 1.5s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+.dark .yoya-shimmer::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(56, 189, 248, 0.14) 50%,
+    transparent 100%
+  );
+}
+
+/* Crisp Fast Modal Scale-In */
+@keyframes yoyaModalScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.97) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.yoya-modal-panel {
+  animation: yoyaModalScaleIn 140ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Gentle Floating Sticker / Particle Motion */
+@keyframes yoyaFloatGentle {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0);
+  }
+}
+
+.yoya-float-gentle {
+  animation: yoyaFloatGentle 4.8s ease-in-out infinite;
+}
+
+/* Ambient Particle Drift */
+@keyframes yoyaParticleDrift {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.22;
+  }
+  50% {
+    transform: translate3d(14px, -22px, 0) scale(1.12);
+    opacity: 0.42;
+  }
+}
+
+/* Button Click Ripple */
+@keyframes yoyaRippleExpand {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.55;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.8);
+    opacity: 0;
+  }
+}
+
+.yoya-ripple-circle {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.72) 0%, rgba(255, 255, 255, 0) 70%);
+  animation: yoyaRippleExpand 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .yoya-shimmer::after,
+  .yoya-modal-panel,
+  .yoya-float-gentle,
+  .yoya-ripple-circle {
+    animation: none !important;
+  }
+  body,
+  .apple-glass,
+  .apple-surface,
+  .apple-inset,
+  .yoya-canvas,
+  .yoya-btn-primary,
+  .yoya-btn-emerald {
+    transition: none !important;
+  }
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+}
